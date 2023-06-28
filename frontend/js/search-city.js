@@ -11,7 +11,6 @@ at the end of "Selected:" line on the webpage. Afterwards, it is sent to backend
 */
 searchBtn.addEventListener("click", (e) => {
     let city = getSelectedCity();
-    //getSelectedCity();
     sendCityToBackend(city);
 
 })
@@ -27,7 +26,7 @@ function getSelectedCity() {
 }
 
 /*
-
+Send city name to backend.
 */
 function sendCityToBackend(city) {
     cityJSON.name = city;

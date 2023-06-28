@@ -79,3 +79,8 @@ body {
     cursor: pointer;
     outline: none;
 }
+
+#map {
+    height: 400px;
+    width: 100%;
+}

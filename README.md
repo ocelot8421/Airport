@@ -4,14 +4,38 @@ Egy szabadon választott technológia segítségével (android, java/spring, php
 A megoldás elküldéséhez szükség lesz egy privát github repository-ra, amin megnézzük a megoldás kódját.
 
 # Operations
-| Operation             | description                                            |
-|-----------------------|--------------------------------------------------------|
-| GET    /login/submit  | Retrieve username and password - non secured!   //TODO |    
-| POST   /intakes/add 	 | ADD a new MedicationIntake series via JSON.            |
+| Operation | Url           | description                                            |
+|-----------|---------------|--------------------------------------------------------|
+| POST      | /login/submit | Retrieve username and password - non secured!   //TODO |    
+| POST      | /search/city  | Send city name to GEODB Api.                           |
 
-# Documentions
+# Documentations
 - GoeDB: https://github.com/wirefreethought/geodb-java-client
 
-# Used code sources:
+# Layers
+```mermaid
+sequenceDiagram
+    participant Frontend
+    participant SearchControll
+    participant SearchService
+    participant GeoDBApiService
+    participant geodbCitiesApi(Web)
+    
+    activate GeoDBApiService
+    Note right of GeoDBApiService: GeoDbApiClient impl
+    deactivate GeoDBApiService
+    
+    Frontend->>SearchControll: City[name] (json)
+    SearchControll->>SearchService: CityDTO[name]
+    SearchService->>GeoDBApiService: CityDTO[name]
+    
+
+
+
+```
+(More info about mermaid sequenceDiagram: https://mermaid.js.org/syntax/sequenceDiagram.html)
+
+## Used code sources:
 - https://medium.com/swlh/how-to-create-your-first-login-page-with-html-css-and-javascript-602dd71144f1
 - https://www.geeksforgeeks.org/how-to-get-selected-value-in-dropdown-list-using-javascript/
+- https://developers.google.com/maps/documentation/javascript/adding-a-google-map#maps_add_map-javascript

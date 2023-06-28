@@ -10,19 +10,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/search")
 public class SearchController {
 
+    @Autowired
+    private SearchService searchService;
 
-
-        @Autowired
-        private SearchService searchService;
-
-        // http://localhost:8081/search/city
-        @PostMapping(path = "/city",
-                consumes = MediaType.APPLICATION_JSON_VALUE,
-                produces = MediaType.APPLICATION_JSON_VALUE)
-        @CrossOrigin
-        public CityDTO searchCity(
-                @RequestBody CityDTO cityDTO
-        ) {
-                return searchService.askCoordinates(cityDTO);
-        }
+    // http://localhost:8081/search/city
+    @PostMapping(path = "/city",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin
+    public CityDTO searchCity(
+            @RequestBody CityDTO cityDTO
+    ) {
+        return searchService.askCoordinates(cityDTO);
+    }
 }
