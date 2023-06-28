@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/login")
 public class LoginController {
 
-    @Autowired
-    private LoginService loginService;
-
-    //    http://localhost:8080/login/success
-    //TODO
+//    @Autowired
+//    private LoginService loginService;
+//
+//    //    http://localhost:8080/login/success
+//    //TODO
 
 
 }

@@ -43,6 +43,5 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.3.19" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:5.3.19" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.3.19" level="project" />
-    <orderEntry type="library" name="Maven: com.wirefreethought.geodb:geodb-java-client:2.0.0" level="project" />
   </component>
 </module>
