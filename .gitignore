@@ -27,3 +27,4 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+/frontend_archived_template/
