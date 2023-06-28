@@ -11,8 +11,8 @@ at the end of "Selected:" line on the webpage. Afterwards, it is sent to backend
 */
 searchBtn.addEventListener("click", (e) => {
     let city = getSelectedCity();
-    getSelectedCity();
-    //sendCityToBackend(city);
+    //getSelectedCity();
+    sendCityToBackend(city);
 
 })
 
@@ -23,30 +23,26 @@ function getSelectedCity() {
     selectElement = document.querySelector('#select1');
     output = selectElement.value;
     document.querySelector('.output').textContent = output;
-    //return output;
+    return output;
 }
 
 /*
 
 */
-//function sendCityToBackend(city) {
-//    cityJSON.name = city;
+function sendCityToBackend(city) {
+    cityJSON.name = city;
 
-//    let tr = button.parentElement.parentElement.parentElement;
-//    let data = collectConnections(tr);
-//    let fetchOptions = {
-//        method: "POST",
-//        mode: "cors",
-//        cache: "no-cache",
-//        headers: {
-//            "Content-Type": "application/json"
-//        },
-//        body: JSON.stringify(data)
-//    };
-//    fetch(`http://localhost:8080/medicines/put/${data.id}`, fetchOptions)
-//        .then(response => response.json())
-//        .catch((error) => console.error(error))
-//        .finally(() => startGetMedication());
-
-//}
+    let fetchOptions = {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(cityJSON)
+    };
+    fetch(`http://localhost:8081/search/city`, fetchOptions)
+        .then(response => response.json())
+        .catch((error) => console.error(error));
+}
 
