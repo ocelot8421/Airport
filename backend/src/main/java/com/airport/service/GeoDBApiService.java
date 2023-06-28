@@ -17,18 +17,29 @@ import java.util.Collections;
 public class GeoDBApiService {
 
     public CityDTO receiveCoordinates(CityDTO cityDTO) {
-        //TODO ...!!!
+        //TODO Paris is not registered as city but admin division. The correct solution should get the country also that is from frontend.
         GeoDbApiClient apiClient = new GeoDbApiClient(GeoDbInstanceType.FREE);
 
         GeoDbApi geoDbApi = new GeoDbApi(apiClient);
 
-        PopulatedPlaceResponse result = geoDbApi.getPlace(
-                GetPlaceRequest.builder()
-                        .placeId("3453089")
+//        PopulatedPlaceResponse result = geoDbApi.getPlace(
+//                GetPlaceRequest.builder()
+//                        .placeId("3453089")
+//                        .build()
+//        );
+//        System.out.println("result.getData():");
+//        System.out.println(result.getData());
+
+        PopulatedPlacesResponse placesResponse = geoDbApi.findPlaces(
+                FindPlacesRequest.builder()
+                        .namePrefix(cityDTO.getName())
+                        .types(Collections.singleton(PlaceRequestType.CITY))
                         .build()
         );
-        System.out.println("result.getData():");
-        System.out.println(result.getData());
+
+        System.out.println("placesResponse.getData():");
+        System.out.println(placesResponse.getData());
+
         return cityDTO;
     }
 
