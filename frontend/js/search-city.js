@@ -5,8 +5,8 @@ const cityJSON = {
 }
 
 /*
-Add search function to "Search" buttun.
-At first, it gets the name of selected city then appers above the button 
+Add search function to "Search" button.
+At first, it gets the name of selected city then appears above the button
 at the end of "Selected:" line on the webpage. Afterwards, it is sent to backend.
 */
 searchBtn.addEventListener("click", (e) => {
@@ -16,11 +16,11 @@ searchBtn.addEventListener("click", (e) => {
 })
 
 /*
-It gets the name of selected city waht is appers above the button at "Selected:" line on the webpage.
+It gets the name of selected city wait is appears above the button at "Selected:" line on the webpage.
 */
 function getSelectedCity() {
-    selectElement = document.querySelector('#select1');
-    output = selectElement.value;
+    const selectElement = document.querySelector('#select1');
+    const output = selectElement.value;
     document.querySelector('.output').textContent = output;
     return output;
 }

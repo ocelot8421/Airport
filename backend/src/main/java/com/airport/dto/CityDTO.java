@@ -10,6 +10,7 @@ import lombok.Setter;
 public class CityDTO {
 
     private String name;
+    private String wikiDataId;
     private Long  latitude;     //szélesség(i kör)
     private Long  longitude;    //hosszúság(i kör)
 
@@ -19,6 +20,7 @@ public class CityDTO {
                 "name='" + name + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
+                ", wikiDataId=" + wikiDataId +
                 '}';
     }
 }

@@ -33,12 +33,15 @@ public class GeoDBApiService {
         PopulatedPlacesResponse placesResponse = geoDbApi.findPlaces(
                 FindPlacesRequest.builder()
                         .namePrefix(cityDTO.getName())
-                        .types(Collections.singleton(PlaceRequestType.CITY))
                         .build()
         );
 
+
         System.out.println("placesResponse.getData():");
         System.out.println(placesResponse.getData());
+//        System.out.println(placesResponse.getLinks());
+        System.out.println(placesResponse.getMetadata());
+
 
         return cityDTO;
     }
