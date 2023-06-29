@@ -1,7 +1,7 @@
-import { initMap } from "./googleMap";
+import { initMap } from "./googleMap.js";
 
 const searchBtn = document.getElementById("searchBtn");
-const cityJSON = {
+export const cityJSON = {
     name: '',
     wikiDataId: '',
     coordinates: { longitude: null, latitude: null }
@@ -66,9 +66,8 @@ function sendCityToBackend(city) {
 }
 
 function saveCoordinates(data) {
-    console.log("city:", data);
+    //console.log("city:", data);
     cityJSON.coordinates.longitude = data.longitude;
     cityJSON.coordinates.latitude = data.latitude;
-    console.log(map);
     initMap();
 }

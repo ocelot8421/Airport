@@ -1,10 +1,12 @@
+import { cityJSON } from "./search-city.js";
+
 // Initialize and add the map
 let map;
 
 //async function initMap() {
 export const initMap = async () => {
     // The location
-    const position = { lat: 0, lng: 0 };
+    let position = { lat: cityJSON.coordinates.latitude, lng: cityJSON.coordinates.longitude };
     // Request needed libraries.
     //@ts-ignore
     const { Map } = await google.maps.importLibrary("maps");
@@ -24,5 +26,3 @@ export const initMap = async () => {
         title: "City",
     });
 }
-
-//initMap();

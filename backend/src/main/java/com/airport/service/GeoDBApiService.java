@@ -2,10 +2,7 @@ package com.airport.service;
 
 import com.airport.dto.CityDTO;
 import com.wirefreethought.geodb.client.GeoDbApi;
-import com.wirefreethought.geodb.client.model.GeoDbInstanceType;
-import com.wirefreethought.geodb.client.model.PopulatedPlaceResponse;
-import com.wirefreethought.geodb.client.model.PopulatedPlaceSummary;
-import com.wirefreethought.geodb.client.model.PopulatedPlacesResponse;
+import com.wirefreethought.geodb.client.model.*;
 import com.wirefreethought.geodb.client.net.GeoDbApiClient;
 import com.wirefreethought.geodb.client.request.FindPlacesRequest;
 import com.wirefreethought.geodb.client.request.GetPlaceRequest;
@@ -32,23 +29,31 @@ public class GeoDBApiService {
 //        System.out.println("result.getData():");
 //        System.out.println(result.getData());
 
+//        PopulatedPlacesResponse placesResponse = geoDbApi.findPlaces(
+//                FindPlacesRequest.builder()
+//                        .namePrefix(cityDTO.getName())
+//                        .build()
+//        );
         PopulatedPlacesResponse placesResponse = geoDbApi.findPlaces(
                 FindPlacesRequest.builder()
                         .namePrefix(cityDTO.getName())
+                        .sort(
+                                GeoDbSort.builder()
+                                        .fields(new GeoDbSort.SortField[] {
+                                                new GeoDbSort.SortField(PlaceSortFields.FindPlaces.POPULATION, true)
+                                        })
+                                        .build())
                         .build()
         );
 
-
-        System.out.println("placesResponse.getData():");
         for (PopulatedPlaceSummary summary : Objects.requireNonNull(placesResponse.getData())) {
-            if (Objects.equals(summary.getWikiDataId(), cityDTO.getWikiDataId())){
-                System.out.println("summary:");
-                System.out.println(summary);
+            if (Objects.equals(summary.getWikiDataId(), cityDTO.getWikiDataId())) {
                 cityDTO.setLongitude(summary.getLongitude());
                 cityDTO.setLatitude(summary.getLatitude());
+                System.out.print("Match -> ");
             }
+            System.out.println(summary.getName() + ", " + summary.getWikiDataId());
         }
-//        System.out.println(placesResponse.getLinks());
         System.out.println(placesResponse.getMetadata());
 
 
