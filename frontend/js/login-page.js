@@ -7,7 +7,7 @@ loginButton.addEventListener("click", (e) => {
     const username = loginForm.username.value;
     const password = loginForm.password.value;
 
-    if (username === "a" && password === "p") {
+    if (username === "Superman" && password === "speed of light") {
         window.open(`city.html`);
         location.reload();
     } else {

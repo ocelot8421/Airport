@@ -55,8 +55,6 @@ public class GeoDBApiService {
             System.out.println(summary.getName() + ", " + summary.getWikiDataId());
         }
         System.out.println(placesResponse.getMetadata());
-
-
         return cityDTO;
     }
 
