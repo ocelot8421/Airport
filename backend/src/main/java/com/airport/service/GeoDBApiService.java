@@ -4,6 +4,7 @@ import com.airport.dto.CityDTO;
 import com.wirefreethought.geodb.client.GeoDbApi;
 import com.wirefreethought.geodb.client.model.GeoDbInstanceType;
 import com.wirefreethought.geodb.client.model.PopulatedPlaceResponse;
+import com.wirefreethought.geodb.client.model.PopulatedPlaceSummary;
 import com.wirefreethought.geodb.client.model.PopulatedPlacesResponse;
 import com.wirefreethought.geodb.client.net.GeoDbApiClient;
 import com.wirefreethought.geodb.client.request.FindPlacesRequest;
@@ -12,6 +13,7 @@ import com.wirefreethought.geodb.client.request.PlaceRequestType;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Objects;
 
 @Service
 public class GeoDBApiService {
@@ -38,7 +40,14 @@ public class GeoDBApiService {
 
 
         System.out.println("placesResponse.getData():");
-        System.out.println(placesResponse.getData());
+        for (PopulatedPlaceSummary summary : Objects.requireNonNull(placesResponse.getData())) {
+            if (Objects.equals(summary.getWikiDataId(), cityDTO.getWikiDataId())){
+                System.out.println("summary:");
+                System.out.println(summary);
+                cityDTO.setLongitude(summary.getLongitude());
+                cityDTO.setLatitude(summary.getLatitude());
+            }
+        }
 //        System.out.println(placesResponse.getLinks());
         System.out.println(placesResponse.getMetadata());
 

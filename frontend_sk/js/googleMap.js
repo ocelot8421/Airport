@@ -1,8 +1,7 @@
 // Initialize and add the map
 let map;
 
-//async function initMap() {
-export const initMap = async () => {
+async function initMap() {
     // The location
     const position = { lat: 0, lng: 0 };
     // Request needed libraries.
@@ -25,4 +24,4 @@ export const initMap = async () => {
     });
 }
 
-//initMap();
+initMap();

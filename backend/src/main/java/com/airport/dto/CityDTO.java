@@ -11,8 +11,8 @@ public class CityDTO {
 
     private String name;
     private String wikiDataId;
-    private Long  latitude;     //szélesség(i kör)
-    private Long  longitude;    //hosszúság(i kör)
+    private Double  latitude;     //szélesség(i kör)
+    private Double  longitude;    //hosszúság(i kör)
 
     @Override
     public String toString() {

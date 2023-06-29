@@ -1,5 +1,3 @@
-import { initMap } from "./googleMap";
-
 const searchBtn = document.getElementById("searchBtn");
 const cityJSON = {
     name: '',
@@ -70,5 +68,4 @@ function saveCoordinates(data) {
     cityJSON.coordinates.longitude = data.longitude;
     cityJSON.coordinates.latitude = data.latitude;
     console.log(map);
-    initMap();
 }

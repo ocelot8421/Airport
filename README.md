@@ -21,13 +21,17 @@ sequenceDiagram
     participant GeoDBApiService
     participant geodbCitiesApi(Web)
     
+    Frontend->>SearchControll: City[name,wikiID] (json)
+    Frontend-->>SearchControll: { Paris, Q90 }
+    
     activate GeoDBApiService
     Note right of GeoDBApiService: GeoDbApiClient impl
     deactivate GeoDBApiService
     
-    Frontend->>SearchControll: City[name] (json)
-    SearchControll->>SearchService: CityDTO[name]
-    SearchService->>GeoDBApiService: CityDTO[name]
+    SearchControll->>SearchService: CityDTO[name, wikiID]
+    SearchControll-->>SearchService: Paris, Q90
+    SearchService->>GeoDBApiService: String[wikiID]
+    SearchService-->>GeoDBApiService: Q90
     
 
 
