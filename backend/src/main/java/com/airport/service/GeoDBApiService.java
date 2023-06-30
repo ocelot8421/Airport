@@ -26,7 +26,7 @@ public class GeoDBApiService {
     private String citiName;
     private Metadata metadata;
 
-    public CityDTO findPopulatedPlaces(CityDTO cityDTO) {
+    public PopulatedPlaceSummary findPopulatedPlaces(CityDTO cityDTO) {
 
         citiName = cityDTO.getName();
         GeoDbApiClient apiClient = new GeoDbApiClient(GeoDbInstanceType.FREE);
@@ -48,17 +48,15 @@ public class GeoDBApiService {
         // To manipulate the printing of metadata
         metadata = placesResponse.getMetadata();
 
-        return findCoordinates(placesResponse, cityDTO);
+        return findCityData(placesResponse, cityDTO);
     }
 
-    private CityDTO findCoordinates(PopulatedPlacesResponse placesResponse, CityDTO cityDTO) {
+    private PopulatedPlaceSummary findCityData(PopulatedPlacesResponse placesResponse, CityDTO cityDTO) {
         for (PopulatedPlaceSummary summary : Objects.requireNonNull(placesResponse.getData())) {
-            if (Objects.equals(summary.getWikiDataId(), cityDTO.getWikiDataId())) {
-                cityDTO.setLongitude(summary.getLongitude());
-                cityDTO.setLatitude(summary.getLatitude());
-            }
+            if (Objects.equals(summary.getWikiDataId(), cityDTO.getWikiDataId()))
+                return summary;
         }
-        return cityDTO;
+        return null;
     }
 
     public void printNumOfAllResult() {

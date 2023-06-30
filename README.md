@@ -24,42 +24,53 @@ sequenceDiagram
     Frontend-->>SearchControll: { Paris, Q90 }
     
     activate SearchControll
-    Note right of SearchControll: cityDTO searchCity (cityDTO)<br/>JSON -> cityDTO
+    Note right of SearchControll: cityDTO<br/>searchCity<br/>(cityDTO)<br/>/JSON -> cityDTO/
     SearchControll-->>SearchService: Paris, Q90
     deactivate SearchControll
     
-    
     activate SearchService
-    Note right of SearchService: cityDTO askCoordinates (cityDTO)
-        
+    Note right of SearchService: cityDTO <br/> askCoordinates <br/> (cityDTO)
     SearchService-->>GeoDBApiService: Paris, Q90
     deactivate SearchService
     
     activate GeoDBApiService
-    Note right of GeoDBApiService: cityDTO receiveCoordinates(cityDTO)
+    Note right of GeoDBApiService: PopulatedPlaceSummary <br/> findPopulatedPlaces <br/>(cityDTO)
     GeoDBApiService-->>GeoDbApi: Paris (string)
     activate GeoDbApi
     rect rgb(50, 50, 50)
-    Note left of GeoDbApi: PopulatedPlacesResponse<br/>findPlaces(FindPlacesRequest)
+    Note left of GeoDbApi: PopulatedPlacesResponse<br/>findPlaces<br/>(FindPlacesRequest)
     activate GeoDBApiService
         GeoDbApi-->>GeoDBApiService: Paris ...
-        GeoDbApi-->>GeoDBApiService: Parish of Saint Andrew  ...
-        GeoDbApi-->>GeoDBApiService: ... 50 results 
+        GeoDbApi-->>GeoDBApiService: Parish of<br/>Saint Andrew  ...
+        GeoDbApi-->>GeoDBApiService: arrondissements<br/>of Paris ...
+        GeoDbApi-->>GeoDBApiService: ... (50 results) 
     end
     
     deactivate GeoDbApi
-    Note right of GeoDBApiService: CityDTO findCoordinates<br/>(PopulatedPlacesResponse)
+    Note right of GeoDBApiService: PopulatedPlaceSummary<br/> findCityData<br/>(PopulatedPlacesResponse)
     deactivate GeoDBApiService
     
     activate GeoDBApiService
-    GeoDBApiService-->>GeoDBApiService: matedata
-    Note right of GeoDBApiService: void printNumOfAllResult(String)
+    Note right of GeoDBApiService: void printNumOfAllResult()<br/>/metadata, citiName/
     deactivate GeoDBApiService
     
-    GeoDBApiService-->>SearchService: Paris, Q90,<br/>lat: 48.856666666,<br/>lng: 2.35222222
+    GeoDBApiService-->>SearchService: Paris summary data<br/>(PopulatedPlaceSummary)
     deactivate GeoDBApiService
     
+    activate SearchService
+    Note right of SearchService: cityDTO<br/>askCoordinates<br/>(cityDTO)
+    activate SearchService
+    Note right of SearchService: CityDTO<br/>saveCoordinates<br/>(PopulatedPlaceSummary)<br/>/No result check/
+    deactivate SearchService
+    rect rgb(50, 50, 50)
+        SearchService-->>SearchControll: Paris<br/>Q90<br/>lat: 48.856666666<br/>lng: 2.35222222
+    end
+    deactivate SearchService
     
+    activate SearchControll
+    Note right of SearchControll: cityDTO<br/>searchCity<br/>(cityDTO)<br/>/cityDTO -> JSON/
+    SearchControll-->>Frontend: Paris, Q90,<br/>lat: 48.856666666,<br/>lng: 2.35222222
+    deactivate SearchControll
 
 ```
 

@@ -13,6 +13,7 @@ public class CityDTO {
     private String wikiDataId;
     private Double latitude;     //szélesség(i kör)
     private Double longitude;    //hosszúság(i kör)
+    private String error;
 
     @Override
     public String toString() {

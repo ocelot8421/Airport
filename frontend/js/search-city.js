@@ -4,7 +4,8 @@ const searchBtn = document.getElementById("searchBtn");
 export const cityJSON = {
     name: '',
     wikiDataId: '',
-    coordinates: { longitude: null, latitude: null }
+    coordinates: { longitude: null, latitude: null },
+    error: ''
 }
 /*
 wikiDataId example: Paris -> https://www.wikidata.org/wiki/Q90.
@@ -66,8 +67,9 @@ function sendCityToBackend(city) {
 }
 
 function saveCoordinates(data) {
-    //console.log("city:", data);
     cityJSON.coordinates.longitude = data.longitude;
     cityJSON.coordinates.latitude = data.latitude;
+    cityJSON.error = data.error;
+    console.log(cityJSON.error);
     initMap();
 }

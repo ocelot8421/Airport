@@ -1,6 +1,7 @@
 package com.airport.service;
 
 import com.airport.dto.CityDTO;
+import com.wirefreethought.geodb.client.model.PopulatedPlaceSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +12,28 @@ public class SearchService {
     private GeoDBApiService geoDBApiService;
 
     public CityDTO askCoordinates(CityDTO cityDTO) {
+        PopulatedPlaceSummary summary = geoDBApiService.findPopulatedPlaces(cityDTO);
 
-        CityDTO resultCity = geoDBApiService.findPopulatedPlaces(cityDTO);
-        System.out.println(resultCity); // log out result
+        // null check
+        saveCoordinates(summary, cityDTO);
+        System.out.println(cityDTO); // log out result
 
         geoDBApiService.printNumOfAllResult();
-        return resultCity;
+        return cityDTO;
+    }
+
+    private void saveCoordinates(PopulatedPlaceSummary summary, CityDTO cityDTO) {
+        String errorMsg;
+        if (summary == null) {
+            errorMsg = "No result of searching in GeoDB.";
+            cityDTO.setError(errorMsg);
+            System.out.println(errorMsg);
+        } else {
+            errorMsg = "City found!";
+            cityDTO.setError(errorMsg);
+            System.out.println(errorMsg);
+            cityDTO.setLongitude(summary.getLongitude());
+            cityDTO.setLatitude(summary.getLatitude());
+        }
     }
 }
