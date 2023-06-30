@@ -19,24 +19,54 @@ sequenceDiagram
     participant SearchControll
     participant SearchService
     participant GeoDBApiService
-    participant geodbCitiesApi(Web)
-    
-    Frontend->>SearchControll: City[name,wikiID] (json)
+    participant GeoDbApi
+        
     Frontend-->>SearchControll: { Paris, Q90 }
     
+    activate SearchControll
+    Note right of SearchControll: cityDTO searchCity (cityDTO)<br/>JSON -> cityDTO
+    SearchControll-->>SearchService: Paris, Q90
+    deactivate SearchControll
+    
+    
+    activate SearchService
+    Note right of SearchService: cityDTO askCoordinates (cityDTO)
+        
+    SearchService-->>GeoDBApiService: Paris, Q90
+    deactivate SearchService
+    
     activate GeoDBApiService
-    Note right of GeoDBApiService: GeoDbApiClient impl
+    Note right of GeoDBApiService: cityDTO receiveCoordinates(cityDTO)
+    GeoDBApiService-->>GeoDbApi: Paris (string)
+    activate GeoDbApi
+    rect rgb(50, 50, 50)
+    Note left of GeoDbApi: PopulatedPlacesResponse<br/>findPlaces(FindPlacesRequest)
+    activate GeoDBApiService
+        GeoDbApi-->>GeoDBApiService: Paris ...
+        GeoDbApi-->>GeoDBApiService: Parish of Saint Andrew  ...
+        GeoDbApi-->>GeoDBApiService: ... 50 results 
+    end
+    
+    deactivate GeoDbApi
+    Note right of GeoDBApiService: CityDTO findCoordinates<br/>(PopulatedPlacesResponse)
     deactivate GeoDBApiService
     
-    SearchControll->>SearchService: CityDTO[name, wikiID]
-    SearchControll-->>SearchService: Paris, Q90
-    SearchService->>GeoDBApiService: String[wikiID]
-    SearchService-->>GeoDBApiService: Q90
+    activate GeoDBApiService
+    GeoDBApiService-->>GeoDBApiService: matedata
+    Note right of GeoDBApiService: void printNumOfAllResult(String)
+    deactivate GeoDBApiService
+    
+    GeoDBApiService-->>SearchService: Paris, Q90,<br/>lat: 48.856666666,<br/>lng: 2.35222222
+    deactivate GeoDBApiService
+    
     
 
-
-
 ```
+
+`+: Public`
+`-: Private`
+`#: Protected`
+`~: Package/Internal`
 (More info about mermaid sequenceDiagram: https://mermaid.js.org/syntax/sequenceDiagram.html)
 
 ## Used code sources:

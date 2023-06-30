@@ -11,9 +11,11 @@ public class SearchService {
     private GeoDBApiService geoDBApiService;
 
     public CityDTO askCoordinates(CityDTO cityDTO) {
-        System.out.println(" - - - cityDTO: " + cityDTO);
-        CityDTO resultCity = geoDBApiService.receiveCoordinates(cityDTO);
-        System.out.println("resultCity" + resultCity);
+
+        CityDTO resultCity = geoDBApiService.findPopulatedPlaces(cityDTO);
+        System.out.println(resultCity); // log out result
+
+        geoDBApiService.printNumOfAllResult();
         return resultCity;
     }
 }

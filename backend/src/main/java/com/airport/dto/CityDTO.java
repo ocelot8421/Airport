@@ -11,16 +11,13 @@ public class CityDTO {
 
     private String name;
     private String wikiDataId;
-    private Double  latitude;     //szélesség(i kör)
-    private Double  longitude;    //hosszúság(i kör)
+    private Double latitude;     //szélesség(i kör)
+    private Double longitude;    //hosszúság(i kör)
 
     @Override
     public String toString() {
-        return "CityDTO{" +
-                "name='" + name + '\'' +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
-                ", wikiDataId=" + wikiDataId +
-                '}';
+        return "result: \n --- " + name + " ---\n" +
+                "latitude: " + latitude + ", longitude: " + longitude + "\n" +
+                "wikiDataId: " + wikiDataId;
     }
 }
