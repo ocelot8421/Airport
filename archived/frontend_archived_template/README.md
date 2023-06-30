@@ -1,1 +1,0 @@
-Origin of the template: https://colorlib.com/wp/template/login-form-v9/
