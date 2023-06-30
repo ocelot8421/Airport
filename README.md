@@ -1,4 +1,4 @@
-<img src="screenshots/login.JPG" height="400"><img src="screenshots/mapAfterSearch.JPG" height="400">
+<img src="screenshots/login.JPG" height="450"><img src="screenshots/mapAfterSearch.JPG" height="450">
 
 # Specification (hungarian)
 Fejlesztési feladat
@@ -6,10 +6,12 @@ Egy szabadon választott technológia segítségével (android, java/spring, php
 A megoldás elküldéséhez szükség lesz egy privát github repository-ra, amin megnézzük a megoldás kódját.
 
 # Operations
+backend port: 8081
+
 | Operation | Url           | description                                            |
 |-----------|---------------|--------------------------------------------------------|
 | POST      | /login/submit | Retrieve username and password - non secured!   //TODO |    
-| POST      | /search/city  | Send city name to GEODB Api.                           |
+| POST      | /search/city  | Search city name in GeoDB (using wkik-data-id)         |
 
 # Documentations
 - GoeDB: https://github.com/wirefreethought/geodb-java-client
